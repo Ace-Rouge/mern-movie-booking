@@ -37,6 +37,24 @@ export default function MyTickets() {
     );
   }
 
+  const handleCancel = async (bookingId) => {
+    if (!window.confirm("Are you sure you want to cancel this ticket? The seats will be released immediately.")) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:5000/api/bookings/${bookingId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      alert("Ticket cancelled successfully.");
+      // Remove the deleted ticket from the screen without needing to refresh the page
+      setTickets(tickets.filter(ticket => ticket._id !== bookingId));
+    } catch (error) {
+      console.error("Failed to cancel ticket:", error);
+      alert("Failed to cancel ticket. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-20 px-4 md:px-16 text-white">
       <div className="max-w-6xl mx-auto">
@@ -78,6 +96,21 @@ export default function MyTickets() {
                         <p className="text-[10px] text-slate-500 uppercase tracking-widest">Seats</p>
                         <p className="font-bold text-[#ff7a00] text-lg">{ticket.seats.join(', ')}</p>
                       </div>
+                    </div>
+                  </div>
+                  <div className="mt-auto border-t border-dashed border-white/20 pt-4 flex justify-between items-end">
+                    <div>
+                      <p className="text-xs text-slate-500 uppercase tracking-widest">Total Paid</p>
+                      <p className="text-xl font-bold text-green-400">₹{ticket.totalPrice}</p>
+                    </div>
+                    <div className="flex flex-col items-end gap-2">
+                      <p className="text-[10px] text-slate-500 tracking-wider font-mono">ID: {ticket._id.slice(-8).toUpperCase()}</p>
+                      <button 
+                        onClick={() => handleCancel(ticket._id)}
+                        className="text-[10px] bg-transparent border border-red-500/50 text-red-400 hover:bg-red-500 hover:text-white transition-colors px-3 py-1 rounded tracking-widest uppercase font-bold"
+                      >
+                        Cancel Ticket
+                      </button>
                     </div>
                   </div>
                   

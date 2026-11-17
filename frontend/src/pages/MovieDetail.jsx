@@ -68,19 +68,32 @@ export default function Movie() {
           
           
          {/* Dynamic Showtimes & Price */}
-          <div className="flex flex-wrap gap-4 mt-2">
-            {validShowtimes.length > 0 ? (
-              validShowtimes.map((time, index) => (
-                <button 
-                  key={index}
-                  onClick={() => navigate(`/book/${movie._id}?time=${encodeURIComponent(time)}`)}
-                  className="bg-red-600 hover:bg-red-700 transition-colors text-white font-bold py-3 px-6 rounded shadow-lg"
-                >
-                  {time} - ₹{movie.price || 0}
-                </button>
-              ))
+          <div className="flex flex-wrap gap-5 mt-6">
+            {movie.showtimes && (Array.isArray(movie.showtimes) ? movie.showtimes : movie.showtimes.split(',')).length > 0 ? (
+              (Array.isArray(movie.showtimes) ? movie.showtimes : movie.showtimes.split(',')).map((time, index) => {
+                const cleanTime = time.trim();
+                if (!cleanTime) return null;
+                return (
+                  <button 
+                    key={index}
+                    onClick={() => navigate(`/book/${movie._id}?time=${encodeURIComponent(cleanTime)}`)}
+                    className="group relative bg-[#12121a] border border-white/10 hover:border-[#ff3366] rounded-xl px-6 py-4 flex items-center gap-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,51,102,0.3)]"
+                  >
+                    {/* Glowing Dot & Time */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-2 h-2 rounded-full bg-[#ff7a00] animate-pulse shadow-[0_0_10px_#ff7a00]"></div>
+                      <span className="text-white font-black text-xl tracking-widest">{cleanTime}</span>
+                    </div>
+                    
+                    {/* Price Pill */}
+                    <div className="bg-[#ff3366]/10 border border-[#ff3366]/30 text-[#ff3366] px-3 py-1 rounded text-sm font-bold tracking-widest">
+                      ₹{movie.price || 0}
+                    </div>
+                  </button>
+                );
+              })
             ) : (
-              <p className="text-gray-400 italic">No showtimes available yet. Check back later.</p>
+              <p className="text-gray-400 italic tracking-widest text-sm">No showtimes available yet. Check back later.</p>
             )}
           </div>
         </div>
