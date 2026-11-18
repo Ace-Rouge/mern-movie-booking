@@ -24,7 +24,7 @@ const upload = multer({ storage });
 router.post("/", upload.single("image"), (req, res) => {
   if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
-  const imageUrl = `https://mern-movie-booking-omega.vercel.app//uploads/${req.file.filename}`;
+  const imageUrl = `https://mern-movie-booking-delta.vercel.app/uploads/${req.file.filename}`;
   res.status(200).json({ imageUrl });
 });
 

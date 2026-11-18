@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   const fetchMovies = async () => {
     try {
       const response = await axios.get(
-        "https://mern-movie-booking-omega.vercel.app//api/movies",
+        "https://mern-movie-booking-delta.vercel.app/api/movies",
       );
       setMovies(response.data);
     } catch (error) {
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
         const imageForm = new FormData();
         imageForm.append("image", imageFile);
         const uploadResponse = await axios.post(
-          "https://mern-movie-booking-omega.vercel.app//api/upload",
+          "https://mern-movie-booking-delta.vercel.app/api/upload",
           imageForm,
           {
             headers: {
@@ -86,7 +86,7 @@ export default function AdminDashboard() {
       // Send the correct API request based on Edit vs Create
       if (isEditing) {
         await axios.put(
-          `https://mern-movie-booking-omega.vercel.app//api/movies/${currentId}`,
+          `https://mern-movie-booking-delta.vercel.app/api/movies/${currentId}`,
           movieData,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -95,7 +95,7 @@ export default function AdminDashboard() {
         alert("Movie updated successfully!");
       } else {
         await axios.post(
-          "https://mern-movie-booking-omega.vercel.app//api/movies",
+          "https://mern-movie-booking-delta.vercel.app/api/movies",
           movieData,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -138,7 +138,7 @@ export default function AdminDashboard() {
     if (!window.confirm("Are you sure you want to delete this movie?")) return;
     try {
       await axios.delete(
-        `https://mern-movie-booking-omega.vercel.app//api/movies/${id}`,
+        `https://mern-movie-booking-delta.vercel.app/api/movies/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },

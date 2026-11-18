@@ -17,7 +17,7 @@ export default function MyTickets() {
 
       try {
         const response = await axios.get(
-          "https://mern-movie-booking-omega.vercel.app//api/bookings/my-tickets",
+          "https://mern-movie-booking-delta.vercel.app/api/bookings/my-tickets",
           {
             headers: { Authorization: `Bearer ${token}` },
           },
@@ -53,7 +53,7 @@ export default function MyTickets() {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `https://mern-movie-booking-omega.vercel.app//api/bookings/${bookingId}`,
+        `https://mern-movie-booking-delta.vercel.app/api/bookings/${bookingId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
