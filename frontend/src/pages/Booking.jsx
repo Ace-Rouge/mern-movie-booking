@@ -23,12 +23,12 @@ export default function Booking() {
     const fetchData = async () => {
       try {
         const seatResponse = await axios.get(
-          `https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/bookings/movie/${movieId}?time=${encodeURIComponent(showtime)}`,
+          `https://mern-movie-booking-omega.vercel.app//api/bookings/movie/${movieId}?time=${encodeURIComponent(showtime)}`,
         );
         setBookedSeats(seatResponse.data);
 
         const movieResponse = await axios.get(
-          `https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/movies/${movieId}`,
+          `https://mern-movie-booking-omega.vercel.app//api/movies/${movieId}`,
         );
         setMovie(movieResponse.data);
       } catch (error) {
@@ -83,7 +83,7 @@ export default function Booking() {
       if (selectedSeats.includes(seatId)) {
         // Unlock the seat
         await axios.delete(
-          "https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/bookings/lock",
+          "https://mern-movie-booking-omega.vercel.app//api/bookings/lock",
           {
             headers: { Authorization: `Bearer ${token}` },
             data: { movieId, showtime, seatId }, // Axios DELETE requires body in 'data'
@@ -101,7 +101,7 @@ export default function Booking() {
       } else {
         // Lock the seat
         await axios.post(
-          "https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/bookings/lock",
+          "https://mern-movie-booking-omega.vercel.app//api/bookings/lock",
           { movieId, showtime, seatId },
           { headers: { Authorization: `Bearer ${token}` } },
         );
@@ -134,7 +134,7 @@ export default function Booking() {
       };
 
       await axios.post(
-        "https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/bookings",
+        "https://mern-movie-booking-omega.vercel.app//api/bookings",
         bookingData,
         {
           headers: { Authorization: `Bearer ${token}` },

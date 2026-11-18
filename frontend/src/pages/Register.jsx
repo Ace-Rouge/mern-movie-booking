@@ -19,7 +19,7 @@ export default function Register() {
     e.preventDefault();
     try {
       await axios.post(
-        "https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/auth/register",
+        "https://mern-movie-booking-omega.vercel.app//api/auth/register",
         formData,
       );
       navigate("/login");

@@ -16,7 +16,7 @@ export default function Login() {
     try {
       // Inside your handleSubmit try block:
       const response = await axios.post(
-        "https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/auth/login",
+        "https://mern-movie-booking-omega.vercel.app//api/auth/login",
         formData,
       );
       localStorage.setItem("token", response.data.token);

@@ -11,7 +11,7 @@ export default function Home() {
     const fetchMovies = async () => {
       try {
         const response = await axios.get(
-          "https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/movies",
+          "https://mern-movie-booking-omega.vercel.app//api/movies",
         );
         setMovies(response.data);
         setLoading(false);

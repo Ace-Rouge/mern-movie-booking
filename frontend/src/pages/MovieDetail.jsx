@@ -13,7 +13,7 @@ export default function Movie() {
     const fetchMovie = async () => {
       try {
         const response = await axios.get(
-          "https://mern-movie-booking-8vbig2i4x-ace-05af.vercel.app/api/movies",
+          "https://mern-movie-booking-omega.vercel.app//api/movies",
         );
         const foundMovie = response.data.find((m) => m._id === id);
         setMovie(foundMovie);
